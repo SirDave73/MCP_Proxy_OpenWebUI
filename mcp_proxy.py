@@ -12,7 +12,10 @@ from aiohttp import web
 from aiohttp.web import Request, Response
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 class MCPProxy:
@@ -125,7 +128,7 @@ def main():
     # Get configuration from environment variables
     ollama_url = os.environ.get('OLLAMA_URL', 'http://localhost:11434')
     openwebui_url = os.environ.get('OPENWEBUI_URL', 'http://localhost:3000')
-    port = int(os.environ.get('PORT', 8888))
+    port = int(os.environ.get('PORT', 8000))
     
     # Create and run the app
     app = create_app(ollama_url, openwebui_url)
@@ -134,7 +137,12 @@ def main():
     logger.info(f"Ollama URL: {ollama_url}")
     logger.info(f"OpenWebUI URL: {openwebui_url}")
     
-    web.run_app(app, port=port)
+    try:
+        web.run_app(app, port=port)
+    except KeyboardInterrupt:
+        logger.info("Server stopped by user")
+    except Exception as e:
+        logger.error(f"Server error: {str(e)}")
 
 if __name__ == '__main__':
     main()
