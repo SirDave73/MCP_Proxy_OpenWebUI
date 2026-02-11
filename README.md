@@ -18,4 +18,4 @@ A complete MCP (Model Control Protocol) proxy server designed for full compatibi
 1. Clone the repository:
 ```bash
 git clone https://github.com/sirdave73/mcp_proxy_openwebui.git
-cd mcp-proxy-openwebui
+cd mcp_proxy_openwebui
