@@ -125,7 +125,7 @@ def main():
     # Get configuration from environment variables
     ollama_url = os.environ.get('OLLAMA_URL', 'http://localhost:11434')
     openwebui_url = os.environ.get('OPENWEBUI_URL', 'http://localhost:3000')
-    port = int(os.environ.get('PORT', 8000))
+    port = int(os.environ.get('PORT', 8888))
     
     # Create and run the app
     app = create_app(ollama_url, openwebui_url)
